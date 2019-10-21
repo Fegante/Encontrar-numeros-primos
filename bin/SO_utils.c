@@ -1,21 +1,20 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "SO_utils.h"
-#include <stdio.h>
-#include <stdlib.h>
+
 
 int** criaMatriz(unsigned int linha, unsigned int coluna, unsigned int semente) { // cria a matriz **testada**
 	int m, n;
 	int** matriz; //cria uma matriz
-	srand(semente); // coloca um semente pr� definida
+	srand(semente); // coloca um semente pré definida
 	matriz = (int**)malloc(sizeof(int*) * linha); // Um vetor de m ponteiros para inteiros
-	if (matriz == NULL) { // verifica se ainda tem espa�o na memoria 
+	if (matriz == NULL) { // verifica se ainda tem espaço na memoria 
 		printf("** Error: Memoria Insuficiente **");
 		return (NULL);
 	}
 	for (m = 0; m < linha; m++) { // m vetores de n inteiros
 		matriz[m] = (int*)malloc(sizeof(int*) * coluna);
-		if (matriz[m] == NULL) { // verifica se ainda tem espa�o na memoria 
+		if (matriz[m] == NULL) { // verifica se ainda tem espaço na memoria 
 			printf("** Erro: Memoria Insuficiente **");
 			return (NULL);
 		}
@@ -23,7 +22,7 @@ int** criaMatriz(unsigned int linha, unsigned int coluna, unsigned int semente) 
 
 	for (m = 0; m < linha; m++) { // percorre as linhas da matriz
 		for (n = 0; n < coluna; n++) { // percorre as coluna da matriz 
-			matriz[m][n] = (rand() % 30000); // gera um numero entre 0  a 29999 e coloca na posi��o Lin x Col
+			matriz[m][n] = (rand() % 30000); // gera um numero entre 0  a 29999 e coloca na posição Lin x Col
 		}
 	}
 
@@ -33,7 +32,7 @@ int** criaMatriz(unsigned int linha, unsigned int coluna, unsigned int semente) 
 
 int** destroiMatriz(unsigned int linha, unsigned int coluna, int** matriz) { // destroi a matriz **testada**
 	int i, j; // variavel axiliar;
-	if (matriz == NULL) { // verifica se a matriz n�o � nula
+	if (matriz == NULL) { // verifica se a matriz não é nula
 		return (NULL);
 	}
 	if (linha < 1 || coluna < 1) { // verifica parametros recebidos 
@@ -72,8 +71,8 @@ void valores_padroes(){
 void menu(){
     int opcao;
     valores_padroes();
-    printf("Digite 1 para iniciar sem concorrência\n");
-    printf("Digite 2 para iniciar com concorrência\n");
+    printf("Digite 1 para iniciar sem concorrÃªncia\n");
+    printf("Digite 2 para iniciar com concorrÃªncia\n");
     printf("Digite 3 para personalizar as entradas\n");
     printf("Digite 4 para sair\n");
 
@@ -94,7 +93,7 @@ void menu(){
         exit(0);
         break;
     default:
-        printf("Valor não identificado, favor tentar novamente\n");
+        printf("Valor nÃ£o identificado, favor tentar novamente\n");
         break;
     }
 }
