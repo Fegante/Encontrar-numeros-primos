@@ -1,7 +1,7 @@
 #ifndef SO_UTILS_INCLUDED
 #define SO_UTILS_INCLUDED
 
-/*Tamanho da matriz, se precisar de uma maior altere aqui.1*/
+/*Tamanho da matriz, se precisar de uma maior altere aqui.*/
 
 void calcula_tempo();
 
