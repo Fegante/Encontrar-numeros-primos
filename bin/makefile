@@ -1,2 +1,4 @@
-main: main.c SO_utils.c
-     gcc -o main main.c SO_utils.c -I.
+### Makefile ###
+
+main: main.c SO_utils.o SO_utils.h
+    gcc -o main SO_utils.o main.c
