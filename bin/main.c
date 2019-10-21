@@ -3,7 +3,11 @@
 #include "SO_utils.c"
 
 
-int matriz[MAX_TAM][MAX_TAM];
+int **matriz;
+int num_primos = 0;
+
 
 int main(){
+    menu();
+    return 0;
 }

@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "SO_utils.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 int** criaMatriz(unsigned int linha, unsigned int coluna, unsigned int semente) { // cria a matriz **testada**
 	int m, n;
@@ -61,4 +63,38 @@ int numero_de_primos(int matriz[], int i, int j ){
         aux += verifica_primo(matriz[k]);
     }
     return aux;
+}
+
+void valores_padroes(){
+    printf("O programa se inicia com os respectivos valores iniciais\n");
+}
+
+void menu(){
+    int opcao;
+    valores_padroes();
+    printf("Digite 1 para iniciar sem concorrência\n");
+    printf("Digite 2 para iniciar com concorrência\n");
+    printf("Digite 3 para personalizar as entradas\n");
+    printf("Digite 4 para sair\n");
+
+    scanf("%d",&opcao);
+    switch (opcao)
+    {
+    case 1:
+        /* code */
+        break;
+    case 2:
+        /* code */
+        break;
+    case 3:
+        /* code */
+        break;
+    case 4:
+        /* code */
+        exit(0);
+        break;
+    default:
+        printf("Valor não identificado, favor tentar novamente\n");
+        break;
+    }
 }
