@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "SO_utils.h"
+#include <math.h>
 
 
-int** criaMatriz(unsigned int linha, unsigned int coluna, unsigned int semente) { // cria a matriz **testada**
+int** criaMatriz(unsigned int semente) { // cria a matriz **testada**
 	int m, n;
 	int** matriz; //cria uma matriz
 	srand(semente); // coloca um semente pré definida
@@ -30,7 +31,7 @@ int** criaMatriz(unsigned int linha, unsigned int coluna, unsigned int semente) 
 
 }
 
-int** destroiMatriz(unsigned int linha, unsigned int coluna, int** matriz) { // destroi a matriz **testada**
+int** destroiMatriz(int** matriz) { // destroi a matriz **testada**
 	int i, j; // variavel axiliar;
 	if (matriz == NULL) { // verifica se a matriz não é nula
 		return (NULL);
@@ -46,23 +47,46 @@ int** destroiMatriz(unsigned int linha, unsigned int coluna, int** matriz) { // 
 	return (matriz);
 }
 
-int verifica_primo(int numero){
-    int count = numero / 2;
-    for (int i = 2; i < count; i++){
+void imprime_matriz(int** matriz){
+    int i,j;
+    for (int i = 0; i < linha; i++) {
+        for (int j = 0; j < coluna; j++) {
+            printf("%d ",matriz[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+void percorre_matriz(int** matriz, unsigned int i, unsigned int j) {
+    int eh_primo;
+    int k,l;
+    for (k = i; k < linha; k++) {
+        for (l = j; l < coluna; l++) {
+            eh_primo = verifica_primo(matriz[k][l]);
+            if (eh_primo == 0){
+                printf("Não ");
+                return;
+            }
+
+            else{
+                printf("Sim ");
+                num_primos++;
+            }
+        }
+        printf("\n");
+    }
+}
+
+int verifica_primo(int numero) {
+    int count = sqrt(numero);
+    for (int i = 2; i < (count + 1); i++) {
         if ((numero % i) == 0)
             return 0;
     }
     return 1;    
 }
 
-int numero_de_primos(int matriz[], int i, int j ){
-    int aux;
-    for ( int k = 0; k < (i+j); i++)
-    {
-        aux += verifica_primo(matriz[k]);
-    }
-    return aux;
-}
+
 
 void valores_padroes(){
     printf("O programa se inicia com os respectivos valores iniciais\n");
