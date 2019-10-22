@@ -4,10 +4,10 @@
 
 
 int **matriz;
-int num_primos = 0;
 
 
 int main(){
     menu();
+    printf("%d\n",num_primos);
     return 0;
 }
