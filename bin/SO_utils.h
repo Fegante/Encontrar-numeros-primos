@@ -3,15 +3,18 @@
 
 //Tamanho da matriz base
 
-#define LINHA 1000
-#define COLUNA 1000
-#define SEMENTE 6415
-#define MACROBLOCO 3
+//Começo das definição das variáves globais.
+#define LINHA 1000		//Define uma o número de linhas que sua matriz vai ter .
+#define COLUNA 1000		//Define o número de colunas que sua matriz vai ter .
+#define SEMENTE 6415	//Define uma semente para que o srand possa ser o sempre o mesmo nos testes.
+#define MACROBLOCO 3	//Define o número de macroblocos que tera no programa.
 
-#define MAX_VALOR_ALEATORIO 30000
+#define MAX_VALOR_ALEATORIO 30000 //Define que o sradn só poderá gerar número de 0 a 30000.
 
-int num_primos = 0;
-int **matriz;
+int num_primos = 0;     //Define uma variável  de forma global para que todas as threads possa adicionar o numero de primos achados nos MicroBlocos
+int **matriz;			//Define a matriz de forma global apra que todas as threads possam olhara ela
+//Termino da definição das variáves globais.
+
 
 /* Verifica o tamanho dos macroblocos de acordo com a definição daquela rodada de execução.
 *  Input:;
@@ -50,7 +53,8 @@ int** destroi_matriz(int** matriz);
 int verifica_primo(int numero);
 
 /* Número de números primos dentro de uma matriz;
-*  Input: Matriz que deseja percorrer, numeros 
+*  Input: Matriz que deseja percorrer, numeros ;
+*  Output: Número de números primos que existe dentro da matriz passada;
 */
 int numero_de_primos(int** matriz, int i, int j);
 
