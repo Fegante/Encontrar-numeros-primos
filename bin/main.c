@@ -5,11 +5,13 @@
 #include <time.h>
 
 int main(){
+   
     clock_t tick[2];
     double tempo_gasto;
-    matriz = criaMatriz(seed);
+    matriz = criaMatriz();
     
     tick[0] = clock(); //Inicio da contagem de tempo de execução.
+
     percorre_matriz(matriz,0,0);
     tick[1] = clock();
     tempo_gasto = ((tick[1] - tick[0]) / ((double)CLOCKS_PER_SEC/1000));
