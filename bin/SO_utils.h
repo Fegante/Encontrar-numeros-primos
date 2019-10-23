@@ -3,6 +3,7 @@
 
 #define linha 10
 #define coluna 10
+#define seed 6415
 
 int num_primos = 0;
 
@@ -33,6 +34,13 @@ int** destroi_matriz(int** matriz);
 *  0 Caso numero não seja primo
 *  1 Para o numero primo*/
 int verifica_primo(int numero);
+
+/*
+*
+*/
+int numero_de_primos(int** matriz, int i, int j)
+
+int numero_de_primos(int matriz[], int i, int j);
 
 void valores_padroes();
 
