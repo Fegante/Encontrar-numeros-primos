@@ -7,7 +7,7 @@
 
 
 int main(){
-    matriz = criaMatriz(seed);
+    matriz = criaMatriz();
     percorre_matriz(matriz,0,0);
     printf("%d\n",num_primos);
     return 0;
