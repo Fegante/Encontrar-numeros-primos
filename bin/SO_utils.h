@@ -2,7 +2,7 @@
 #define SO_UTILS_INCLUDED
 
 //Tamanho da matriz base
-#define linha 1000
+#define linha 10000
 #define coluna 1000
 #define seed 6415
 #define macrobloco 3
