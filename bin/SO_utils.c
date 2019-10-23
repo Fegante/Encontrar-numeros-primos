@@ -42,6 +42,7 @@ int** destroiMatriz(int** matriz) { // destroi a matriz **testada**
 	}
 	for (i = 0; i < LINHA; i++) { // libera cada linha 
 		free(matriz[i]);
+        
 	}
 	free(matriz);
 	return (matriz);

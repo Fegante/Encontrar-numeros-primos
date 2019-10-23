@@ -2,10 +2,12 @@
 #define SO_UTILS_INCLUDED
 
 //Tamanho da matriz base
+
 #define LINHA 1000
 #define COLUNA 1000
 #define SEMENTE 6415
 #define MACROBLOCO 3
+
 #define MAX_VALOR_ALEATORIO 30000
 
 int num_primos = 0;
