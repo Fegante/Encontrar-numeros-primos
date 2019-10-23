@@ -4,12 +4,11 @@
 #include "SO_utils.c"
 
 
-int **matriz;
 
 
 int main(){
-    int var;
-    menu();
+    matriz = criaMatriz(seed);
+    percorre_matriz(matriz,0,0);
     printf("%d\n",num_primos);
     return 0;
 }
