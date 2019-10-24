@@ -1,5 +1,6 @@
 #ifndef SO_UTILS_INCLUDED
 #define SO_UTILS_INCLUDED
+#include <pthread.h>
 
 //Tamanho da matriz base
 
@@ -8,19 +9,23 @@
 #define COLUNA 1000		//Define o número de colunas que sua matriz vai ter .
 #define SEMENTE 6415	//Define uma semente para que o srand possa ser o sempre o mesmo nos testes.
 #define MACROBLOCO 3	//Define o número de macroblocos que tera no programa.
+#define NUM_THREAD 4 //Define o número de threads que iram ser criadas.
 
-#define MAX_VALOR_ALEATORIO 30000 //Define que o sradn só poderá gerar número de 0 a 30000.
+#define MAX_VALOR_ALEATORIO 30000 //Define que o srand só poderá gerar número de 0 a 30000.
 
 int num_primos = 0;     //Define uma variável  de forma global para que todas as threads possa adicionar o numero de primos achados nos MicroBlocos
 int **matriz;			//Define a matriz de forma global apra que todas as threads possam olhara ela
+pthread_t threads[NUM_THREAD]; //Vetor de threader que serao executadas.
+pthread_mutex_t lock;          //Mutex, Controle de região critica.
 //Termino da definição das variáves globais.
 
 
 /* Verifica o tamanho dos macroblocos de acordo com a definição daquela rodada de execução.
+*  Threads so podem receber um parametro com argumento, nesse caso possívelmente deverá ser um struct
 *  Input:;
 *  output:;
 */
-void calcula_macrobloco ();
+void* percorre_macrobloco (void* arg);
 
 /* Dado uma matriz imprime seus dados;
 *  Input: Matriz que deseja plotar;
@@ -58,9 +63,13 @@ int verifica_primo(int numero);
 */
 int numero_de_primos(int** matriz, int i, int j);
 
+/* Mostra os valores inicias das principais variaveis do sistema.
+*/
 void valores_padroes();
 
-void menu();
+/* Imprime todas as opções possiveis no momento em que é executado o programa.
+*/
+int menu();
 
 #endif
 

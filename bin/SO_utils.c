@@ -58,28 +58,17 @@ void imprime_matriz(int** matriz){ // imprime a matriz **testada**
     }
 }
 
-
-
-void calcula_macrobloco (){
+void* percorre_macrobloco (void* arg){
+    int primo_bloco;
     if (MACROBLOCO > LINHA && MACROBLOCO > COLUNA){
         printf("Não é possível gerar esse numero de macroblocos com a matriz atual\n");
-        return;
     }
-    /* Estou mexendo (Diego)
-    int mac_linha,mac_coluna,espaco_mat;
-    if (linha <= coluna){
-        mac_linha = (linha + coluna) / macrobloco;
-        espaco_mat = linha * coluna;
-        mac_coluna = ((espaco_mat / macrobloco) / mac_linha);
-    }
-    else{
-        mac_coluna = (linha + coluna) / macrobloco;
-        espaco_mat = linha * coluna;
-        mac_linha = ((espaco_mat / macrobloco) / mac_coluna);    
-    }
-    printf("mac_linha é %d\n",mac_linha);
-    printf("mac_coluna é %d\n",mac_coluna);
+    /* PEDAÇO QUE CALCULA TUDO
     */
+
+    pthread_mutex_lock(&lock);
+    num_primos = num_primos + primo_bloco; // Região critica.
+    pthread_mutex_unlock(&lock);
 }
 
 /*Está errada, não é pra percorrer até linha ou coluna
@@ -110,34 +99,22 @@ int verifica_primo(int numero) { // imprime a matriz **testada**
 
 void valores_padroes(){
     printf("O programa se inicia com os respectivos valores iniciais\n");
+    printf("#########################\n");
+    printf("# Linhas:\t %d\n",LINHA);
+    printf("# Colunas:\t %d\n",COLUNA);
+    printf("# Seed\t\t %d\n",SEMENTE);
+    printf("# Macroblocos\t %d\n",MACROBLOCO);
+    printf("# Threads\t %d\n",NUM_THREAD);
+    printf("#########################\n\n");
 }
 
-void menu(){
+int menu(){
     int opcao;
     valores_padroes();
-    printf("Digite 1 para iniciar sem concorrÃªncia\n");
-    printf("Digite 2 para iniciar com concorrÃªncia\n");
-    printf("Digite 3 para personalizar as entradas\n");
-    printf("Digite 4 para sair\n");
+    printf("Digite 1 para roda sem concorrencia\n");
+    printf("Digite 2 para iniciar com concorrencia\n");
+    printf("Digite 3 para sair\n");
 
     scanf("%d",&opcao);
-    switch (opcao)
-    {
-    case 1:
-        /* code */
-        break;
-    case 2:
-        /* code */
-        break;
-    case 3:
-        /* code */
-        break;
-    case 4:
-        /* code */
-        exit(0);
-        break;
-    default:
-        printf("Valor nÃ£o identificado, favor tentar novamente\n");
-        break;
+    return opcao;
     }
-}
