@@ -4,25 +4,25 @@
 #include <math.h>
 
 
-int** criaMatriz(unsigned int semente) { // cria a matriz **testada**
+int** criaMatriz() { // cria a matriz **testada**
 	int m, n;
 	int** matriz; //cria uma matriz
-	srand(semente); // coloca um semente pré definida
-	matriz = (int**)malloc(sizeof(int*) * linha); // Um vetor de m ponteiros para inteiros
+	srand(SEMENTE); // coloca um semente pré definida
+	matriz = (int**)malloc(sizeof(int*) * LINHA); // Um vetor de m ponteiros para inteiros
 	if (matriz == NULL) { // verifica se ainda tem espaço na memoria 
 		printf("** Error: Memoria Insuficiente **");
 		return (NULL);
 	}
-	for (m = 0; m < linha; m++) { // m vetores de n inteiros
-		matriz[m] = (int*)malloc(sizeof(int*) * coluna);
+	for (m = 0; m < LINHA; m++) { // m vetores de n inteiros
+		matriz[m] = (int*)malloc(sizeof(int*) * COLUNA);
 		if (matriz[m] == NULL) { // verifica se ainda tem espaço na memoria 
 			printf("** Erro: Memoria Insuficiente **");
 			return (NULL);
 		}
 	}
 
-	for (m = 0; m < linha; m++) { // percorre as linhas da matriz
-		for (n = 0; n < coluna; n++) { // percorre as coluna da matriz 
+	for (m = 0; m < LINHA; m++) { // percorre as linhas da matriz
+		for (n = 0; n < COLUNA; n++) { // percorre as coluna da matriz 
 			matriz[m][n] = (rand() % MAX_VALOR_ALEATORIO); // gera um numero entre 0  a 29999 e coloca na posição Lin x Col
 		}
 	}
@@ -36,11 +36,11 @@ int** destroiMatriz(int** matriz) { // destroi a matriz **testada**
 	if (matriz == NULL) { // verifica se a matriz não é nula
 		return (NULL);
 	}
-	if (linha < 1 || coluna < 1) { // verifica parametros recebidos 
+	if (LINHA < 1 || COLUNA < 1) { // verifica parametros recebidos 
 		printf("** Erro: Parametro invalido **\n");
 		return (matriz);
 	}
-	for (i = 0; i < linha; i++) { // libera cada linha 
+	for (i = 0; i < LINHA; i++) { // libera cada linha 
 		free(matriz[i]);
         
 	}
@@ -50,8 +50,8 @@ int** destroiMatriz(int** matriz) { // destroi a matriz **testada**
 
 void imprime_matriz(int** matriz){ // imprime a matriz **testada**
     int i,j;
-    for (int i = 0; i < linha; i++) {
-        for (int j = 0; j < coluna; j++) {
+    for (int i = 0; i < LINHA; i++) {
+        for (int j = 0; j < COLUNA; j++) {
             printf("%d ",matriz[i][j]);
         }
         printf("\n");
@@ -61,7 +61,7 @@ void imprime_matriz(int** matriz){ // imprime a matriz **testada**
 
 
 void calcula_macrobloco (){
-    if (macrobloco > linha && macrobloco > coluna){
+    if (MACROBLOCO > LINHA && MACROBLOCO > COLUNA){
         printf("Não é possível gerar esse numero de macroblocos com a matriz atual\n");
         return;
     }
@@ -87,8 +87,8 @@ Deve percorrer até o final do macrobloco. Ainda vai ser definido qual macrobloc
 void percorre_matriz(int** matriz, unsigned int i, unsigned int j) { // imprime a matriz **testada**
     int eh_primo;
     int k,l;
-    for (k = i; k < linha; k++) {
-        for (l = j; l < coluna; l++) {
+    for (k = i; k < LINHA; k++) {
+        for (l = j; l < COLUNA; l++) {
             eh_primo = verifica_primo(matriz[k][l]);
             if (eh_primo == 0){
             }
