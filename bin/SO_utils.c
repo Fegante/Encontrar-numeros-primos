@@ -31,6 +31,27 @@ int** criaMatriz() { // cria a matriz **testada**
 
 }
 
+void imprime_macro_vet(att_macrobloco* pos_macro){
+    int i;
+    for (i = 0; i < TAM_MACROBLOCO; i++) {
+        printf("Macro bloco %d\n",i);
+        printf("Lin: %d Col: %d\n",pos_macro[i].L_inicio,pos_macro[i].C_inicio);
+    }
+}
+
+att_macrobloco* preenche_inicio_macro(att_macrobloco* pos_macro){ //Parece certo, mas tem que testar mais
+    int i,j,k=0;
+    for (j = 0; j < TAM_MACROBLOCO; j+=C_MACRO) {
+        for (i = 0; i < TAM_MACROBLOCO; i+=L_MACRO) {
+            pos_macro[k].L_inicio = j;
+            pos_macro[k].C_inicio = i;
+            k++;
+        }    
+    }
+    
+    return pos_macro;
+}
+
 int** destroiMatriz(int** matriz) { // destroi a matriz **testada**
 	int i, j; // variavel axiliar;
 	if (matriz == NULL) { // verifica se a matriz não é nula
@@ -58,28 +79,13 @@ void imprime_matriz(int** matriz){ // imprime a matriz **testada**
     }
 }
 
+void* percorre_macrobloco (void* arg){ // FUNÇÃO ZUADASSA!!
+    int primo_bloco;
+    
 
-
-void calcula_macrobloco (){
-    if (MACROBLOCO > LINHA && MACROBLOCO > COLUNA){
-        printf("Não é possível gerar esse numero de macroblocos com a matriz atual\n");
-        return;
-    }
-    /* Estou mexendo (Diego)
-    int mac_linha,mac_coluna,espaco_mat;
-    if (linha <= coluna){
-        mac_linha = (linha + coluna) / macrobloco;
-        espaco_mat = linha * coluna;
-        mac_coluna = ((espaco_mat / macrobloco) / mac_linha);
-    }
-    else{
-        mac_coluna = (linha + coluna) / macrobloco;
-        espaco_mat = linha * coluna;
-        mac_linha = ((espaco_mat / macrobloco) / mac_coluna);    
-    }
-    printf("mac_linha é %d\n",mac_linha);
-    printf("mac_coluna é %d\n",mac_coluna);
-    */
+    pthread_mutex_lock(&lock_primo);
+    num_primos = num_primos + primo_bloco; // Região critica.
+    pthread_mutex_unlock(&lock_primo);
 }
 
 /*Está errada, não é pra percorrer até linha ou coluna
@@ -110,34 +116,23 @@ int verifica_primo(int numero) { // imprime a matriz **testada**
 
 void valores_padroes(){
     printf("O programa se inicia com os respectivos valores iniciais\n");
+    printf("#########################\n");
+    printf("# Linhas:\t %d\n",LINHA);
+    printf("# Colunas:\t %d\n",COLUNA);
+    printf("# Seed\t\t %d\n",SEMENTE);
+    printf("# Linha Macroblocos\t %d\n",L_MACRO);
+    printf("# Coluna Macroblocos\t %d\n",C_MACRO);
+    printf("# Threads\t %d\n",NUM_THREAD);
+    printf("#########################\n\n");
 }
 
-void menu(){
+int menu(){
     int opcao;
     valores_padroes();
-    printf("Digite 1 para iniciar sem concorrÃªncia\n");
-    printf("Digite 2 para iniciar com concorrÃªncia\n");
-    printf("Digite 3 para personalizar as entradas\n");
-    printf("Digite 4 para sair\n");
+    printf("Digite 1 para roda sem concorrencia\n");
+    printf("Digite 2 para iniciar com concorrencia\n");
+    printf("Digite 3 para sair\n");
 
     scanf("%d",&opcao);
-    switch (opcao)
-    {
-    case 1:
-        /* code */
-        break;
-    case 2:
-        /* code */
-        break;
-    case 3:
-        /* code */
-        break;
-    case 4:
-        /* code */
-        exit(0);
-        break;
-    default:
-        printf("Valor nÃ£o identificado, favor tentar novamente\n");
-        break;
+    return opcao;
     }
-}
