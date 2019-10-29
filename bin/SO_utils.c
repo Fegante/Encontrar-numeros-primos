@@ -31,6 +31,27 @@ int** criaMatriz() { // cria a matriz **testada**
 
 }
 
+void imprime_macro_vet(att_macrobloco* pos_macro){
+    int i;
+    for (i = 0; i < TAM_MACROBLOCO; i++) {
+        printf("Macro bloco %d\n",i);
+        printf("Lin: %d Col: %d\n",pos_macro[i].L_inicio,pos_macro[i].C_inicio);
+    }
+}
+
+att_macrobloco* preenche_inicio_macro(att_macrobloco* pos_macro){ //Parece certo, mas tem que testar mais
+    int i,j,k=0;
+    for (j = 0; j < TAM_MACROBLOCO; j+=C_MACRO) {
+        for (i = 0; i < TAM_MACROBLOCO; i+=L_MACRO) {
+            pos_macro[k].L_inicio = j;
+            pos_macro[k].C_inicio = i;
+            k++;
+        }    
+    }
+    
+    return pos_macro;
+}
+
 int** destroiMatriz(int** matriz) { // destroi a matriz **testada**
 	int i, j; // variavel axiliar;
 	if (matriz == NULL) { // verifica se a matriz não é nula
@@ -58,17 +79,13 @@ void imprime_matriz(int** matriz){ // imprime a matriz **testada**
     }
 }
 
-void* percorre_macrobloco (void* arg){
+void* percorre_macrobloco (void* arg){ // FUNÇÃO ZUADASSA!!
     int primo_bloco;
-    if (MACROBLOCO > LINHA && MACROBLOCO > COLUNA){
-        printf("Não é possível gerar esse numero de macroblocos com a matriz atual\n");
-    }
-    /* PEDAÇO QUE CALCULA TUDO
-    */
+    
 
-    pthread_mutex_lock(&lock);
+    pthread_mutex_lock(&lock_primo);
     num_primos = num_primos + primo_bloco; // Região critica.
-    pthread_mutex_unlock(&lock);
+    pthread_mutex_unlock(&lock_primo);
 }
 
 /*Está errada, não é pra percorrer até linha ou coluna
@@ -103,7 +120,8 @@ void valores_padroes(){
     printf("# Linhas:\t %d\n",LINHA);
     printf("# Colunas:\t %d\n",COLUNA);
     printf("# Seed\t\t %d\n",SEMENTE);
-    printf("# Macroblocos\t %d\n",MACROBLOCO);
+    printf("# Linha Macroblocos\t %d\n",L_MACRO);
+    printf("# Coluna Macroblocos\t %d\n",C_MACRO);
     printf("# Threads\t %d\n",NUM_THREAD);
     printf("#########################\n\n");
 }
