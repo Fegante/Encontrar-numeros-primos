@@ -45,7 +45,7 @@ void imprime_macro_vet(att_macrobloco *pos_macro)
     }
 }
 
-att_macrobloco *preenche_inicio_macro(att_macrobloco *pos_macro)
+void preenche_inicio_macro(att_macrobloco *pos_macro)
 { //Parece certo, mas tem que testar mais
     int i, j, k = 0;
     for (j = 0; j < TAM_MACROBLOCO; j += C_MACRO)
@@ -58,7 +58,7 @@ att_macrobloco *preenche_inicio_macro(att_macrobloco *pos_macro)
         }
     }
 
-    return pos_macro;
+    //return pos_macro;
 }
 
 int **destroiMatriz(int **matriz)

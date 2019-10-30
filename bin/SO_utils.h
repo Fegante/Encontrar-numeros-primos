@@ -31,7 +31,7 @@ att_macrobloco pos_macro[TAM_MACROBLOCO];
 //Termino da definição das variáves globais.
 
 //Preenche o vetor que dita as posições de inicio de cada macrobloco. PRECISAR TESTAR.
-att_macrobloco *preenche_inicio_macro(att_macrobloco *pos_macro);
+void preenche_inicio_macro(att_macrobloco *pos_macro);
 
 /*Imprime vetor de macroblocos para teste*/
 void imprime_macro_vet(att_macrobloco *pos_macro);

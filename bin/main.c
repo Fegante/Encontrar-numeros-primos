@@ -11,6 +11,7 @@ int main()
     double tempo_gasto;
     matriz = criaMatriz();
     int opcao, i;
+    preenche_inicio_macro(pos_macro);
     // preenche_inicio_macro(pos_macro);
     // imprime_macro_vet(pos_macro);
 
@@ -43,11 +44,16 @@ int main()
             printf("Saindo\n");
             break;
         }
+        pthread_join(threads[0],NULL);
+        pthread_join(threads[1],NULL);
+        pthread_join(threads[2],NULL);
+        pthread_join(threads[3],NULL);
         printf("\n\n");
         printf("############# RESULTADO ################\n");
         printf("#       Numero de primos %d            #\n", num_primos);
         printf("#    Tempo para contagem %.2lf ms      #\n", tempo_gasto);
         printf("########################################\n\n");
+        num_primos = 0;
     }
     matriz = destroiMatriz(matriz);
     pthread_mutex_destroy(&lock_primo);
