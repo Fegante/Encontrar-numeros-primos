@@ -81,6 +81,29 @@ int **destroiMatriz(int **matriz)
     return (matriz);
 }
 
+void zera_vetor(int *macro_vet){
+    int i;
+    for (int i = 0; i < TAM_MACROBLOCO; ++i) {
+        macro_vet[i]=0;
+    }
+}
+
+void *calcula_com_threads(void *arg){
+    int i;
+    
+    for (i = 0; i < TAM_MACROBLOCO; i++) {
+        pthread_mutex_lock(&lock_macro_vet);
+        if (macro_vet[i] == 0) {
+            macro_vet[i]=1;
+            pthread_mutex_unlock(&lock_macro_vet);
+            percorre_macrobloco(&pos_macro[i]);
+        }
+        else{
+            pthread_mutex_unlock(&lock_macro_vet);
+        }
+    }
+}
+
 void imprime_matriz(int **matriz)
 { // imprime a matriz **testada**
     int i, j;
@@ -103,13 +126,14 @@ void *percorre_macrobloco(void *arg)
     att_macrobloco *posicao = arg;
     for (i = posicao->L_inicio; i < posicao->L_inicio + L_MACRO; i++)
     {
-        printf("Entrou\n"); //APAGAR
+        //printf("Entrou\n"); //APAGAR
         for (j = posicao->C_inicio; j < posicao->C_inicio + C_MACRO; j++)
         {
             // printf("Linha: %d \nColuna: %d \nValor: %d\n\n", i, j, matriz[i][j]);
             eh_primo = verifica_primo(matriz[i][j]);
             if (eh_primo)
             {
+                printf("i = %d;j = %d;eh_primo = %d\n",i,j,local_primo);
                 local_primo++;
             }
         }
@@ -149,9 +173,11 @@ void percorre_matriz(unsigned int i, unsigned int j)
             }
         }
     }
+    
     pthread_mutex_lock(&lock_primo);
     num_primos += local_primo; // Região critica.
     pthread_mutex_unlock(&lock_primo);
+
 }
 
 int verifica_primo(int numero)
@@ -165,11 +191,11 @@ int verifica_primo(int numero)
     {
         if ((numero % i) == 0)
         {
-            // printf("Não é primo: %d\n", numero);
+            printf("Não é primo: %d\n", numero);
             return 0;
         }
     }
-    // printf("É primo: %d\n", numero);
+    printf("É primo: %d\n", numero);
     return 1;
 }
 
