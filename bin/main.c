@@ -12,13 +12,13 @@ int main()
     matriz = criaMatriz();
     int opcao, i;
     preenche_inicio_macro(pos_macro);
+    imprime_matriz(matriz);
     // preenche_inicio_macro(pos_macro);
     // imprime_macro_vet(pos_macro);
 
     // testa_percorre_macrobloco();
     while (opcao != 3)
     {
-
         opcao = menu();
         switch (opcao)
         {                      // Modularizar depois quando possível.
@@ -29,31 +29,32 @@ int main()
             tempo_gasto = ((tick[1] - tick[0]) / ((double)CLOCKS_PER_SEC / 1000));
             break;
         case 2:                // MULTI-CORE - INCOMPLETO - **não testada**
+            zera_vetor(macro_vet); //Prepara o vetor que sinaliza que os macroblocos não foram preenchidos.
             tick[0] = clock(); //Inicio da contagem de tempo de execução.
-            for (i = 0; i < TAM_MACROBLOCO; i++)
-            {
-                if (pthread_create(&threads[i], NULL, percorre_macrobloco, (void *)&pos_macro[i]) != 0)
-                { // O ultimo parametro é o parametro pra função da thread.
+            for (i = 0; i < NUM_THREAD; i++) {
+                if (pthread_create(&threads[i], NULL, calcula_com_threads, NULL) != 0) { // O ultimo parametro é o parametro pra função da thread.
                     printf("Houve um erro ao criar a thread %d\n", i);
-                    break;
                 }
             }
             tick[1] = clock(); // Fim do calculo de tempo
+            tempo_gasto = ((tick[1] - tick[0]) / ((double)CLOCKS_PER_SEC / 1000));
+            for (i=0;i<NUM_THREAD;i++){
+                pthread_join(threads[i],NULL);
+            }
             break;
         default:
             printf("Saindo\n");
             break;
         }
-        pthread_join(threads[0],NULL);
-        pthread_join(threads[1],NULL);
-        pthread_join(threads[2],NULL);
-        pthread_join(threads[3],NULL);
+        
+        
         printf("\n\n");
         printf("############# RESULTADO ################\n");
         printf("#       Numero de primos %d            #\n", num_primos);
         printf("#    Tempo para contagem %.2lf ms      #\n", tempo_gasto);
         printf("########################################\n\n");
         num_primos = 0;
+        tempo_gasto = 0;
     }
     matriz = destroiMatriz(matriz);
     pthread_mutex_destroy(&lock_primo);

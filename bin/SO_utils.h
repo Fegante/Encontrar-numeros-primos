@@ -5,14 +5,14 @@
 //Tamanho da matriz base
 
 //Começo das definição das variáves globais.
-#define LINHA 4												  //Define uma o número de linhas que sua matriz vai ter .
-#define COLUNA 4											  //Define o número de colunas que sua matriz vai ter .
+#define LINHA 6 											  //Define uma o número de linhas que sua matriz vai ter .
+#define COLUNA 6											  //Define o número de colunas que sua matriz vai ter .
 #define SEMENTE 6415										  //Define uma semente para que o srand possa ser o sempre o mesmo nos testes.
-#define L_MACRO 2											  //Define o número de macroblocos que tera no programa.
-#define C_MACRO 2											  //Define o número de macroblocos que tera no programa.
+#define L_MACRO 3											  //Define o número de macroblocos que tera no programa.
+#define C_MACRO 3											  //Define o número de macroblocos que tera no programa.
 #define NUM_THREAD 4										  //Define o número de threads que iram ser criadas.
 #define TAM_MACROBLOCO (LINHA * COLUNA) / (L_MACRO * C_MACRO) // Calcula numero de macroblocos
-#define MAX_VALOR_ALEATORIO 6								  //Define que o srand só poderá gerar número de 0 a 30000.
+#define MAX_VALOR_ALEATORIO 4								  //Define que o srand só poderá gerar número de 0 a 30000.
 
 struct att_macrobloco
 { // Estrutura necessária para enviar o inicio dos macroblocos para as threads.
@@ -29,6 +29,11 @@ pthread_mutex_t lock_primo;		//Mutex, Controle de região critica.
 pthread_mutex_t lock_macro_vet; //Muter para o vetor de macroblocos.
 att_macrobloco pos_macro[TAM_MACROBLOCO];
 //Termino da definição das variáves globais.
+
+
+void zera_vetor(int *macro_vet);//NÃO FOI TESTADO AINDA
+
+void *calcula_com_threads(void *arg); //NÃO FOI TESTADO AINDA
 
 //Preenche o vetor que dita as posições de inicio de cada macrobloco. PRECISAR TESTAR.
 void preenche_inicio_macro(att_macrobloco *pos_macro);
