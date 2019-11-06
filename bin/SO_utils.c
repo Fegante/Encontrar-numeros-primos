@@ -3,6 +3,12 @@
 #include "SO_utils.h"
 #include <math.h>
 
+void verif_viabilidade_macrobloco(){
+    if ((LINHA * COLUNA) % (L_MACRO * C_MACRO) != 0) {
+        printf("Essa estrutura de matriz e macrobloco não é compativel\n");
+    }
+}
+
 int **criaMatriz()
 { // cria a matriz **testada**
     int m, n;
@@ -45,19 +51,15 @@ void imprime_macro_vet(att_macrobloco *pos_macro)
     }
 }
 
-void preenche_inicio_macro(att_macrobloco *pos_macro)
-{ //Parece certo, mas tem que testar mais
+void preenche_inicio_macro(att_macrobloco *pos_macro) { //Parece certo, mas tem que testar mais
     int i, j, k = 0;
-    for (j = 0; j < TAM_MACROBLOCO; j += C_MACRO)
-    {
-        for (i = 0; i < TAM_MACROBLOCO; i += L_MACRO)
-        {
-            pos_macro[k].L_inicio = j;
-            pos_macro[k].C_inicio = i;
+    for (j = 0; j < COLUNA; j += C_MACRO) {
+        for (i = 0; i < LINHA; i += L_MACRO) {
+            pos_macro[k].L_inicio = i;
+            pos_macro[k].C_inicio = j;
             k++;
         }
     }
-
     //return pos_macro;
 }
 
@@ -126,14 +128,12 @@ void *percorre_macrobloco(void *arg)
     att_macrobloco *posicao = arg;
     for (i = posicao->L_inicio; i < posicao->L_inicio + L_MACRO; i++)
     {
-        //printf("Entrou\n"); //APAGAR
         for (j = posicao->C_inicio; j < posicao->C_inicio + C_MACRO; j++)
         {
             // printf("Linha: %d \nColuna: %d \nValor: %d\n\n", i, j, matriz[i][j]);
             eh_primo = verifica_primo(matriz[i][j]);
             if (eh_primo)
             {
-                printf("i = %d;j = %d;eh_primo = %d\n",i,j,local_primo);
                 local_primo++;
             }
         }
@@ -191,12 +191,10 @@ int verifica_primo(int numero)
     {
         if ((numero % i) == 0)
         {
-            printf("Não é primo: %d\n", numero);
-            return 0;
+            return 0; //Não é primo
         }
     }
-    printf("É primo: %d\n", numero);
-    return 1;
+    return 1; //É primo
 }
 
 void valores_padroes()
@@ -209,6 +207,7 @@ void valores_padroes()
     printf("# Linha Macroblocos\t %d\n", L_MACRO);
     printf("# Coluna Macroblocos\t %d\n", C_MACRO);
     printf("# Threads\t %d\n", NUM_THREAD);
+    printf("# Tam Blocos\t %d\n", TAM_MACROBLOCO);
     printf("#########################\n\n");
 }
 
