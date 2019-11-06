@@ -5,12 +5,12 @@
 //Tamanho da matriz base
 
 //Começo das definição das variáves globais.
-#define LINHA 6 											  //Define uma o número de linhas que sua matriz vai ter .
-#define COLUNA 6											  //Define o número de colunas que sua matriz vai ter .
+#define LINHA 10000 											  //Define uma o número de linhas que sua matriz vai ter .
+#define COLUNA 20000											  //Define o número de colunas que sua matriz vai ter .
 #define SEMENTE 6415										  //Define uma semente para que o srand possa ser o sempre o mesmo nos testes.
-#define L_MACRO 3											  //Define o número de macroblocos que tera no programa.
-#define C_MACRO 3											  //Define o número de macroblocos que tera no programa.
-#define NUM_THREAD 4										  //Define o número de threads que iram ser criadas.
+#define L_MACRO 100											  //Define o número de macroblocos que tera no programa.
+#define C_MACRO 10											  //Define o número de macroblocos que tera no programa.
+#define NUM_THREAD 100										  //Define o número de threads que iram ser criadas.
 #define TAM_MACROBLOCO (LINHA * COLUNA) / (L_MACRO * C_MACRO) // Calcula numero de macroblocos
 #define MAX_VALOR_ALEATORIO 4								  //Define que o srand só poderá gerar número de 0 a 30000.
 
@@ -30,6 +30,8 @@ pthread_mutex_t lock_macro_vet; //Muter para o vetor de macroblocos.
 att_macrobloco pos_macro[TAM_MACROBLOCO];
 //Termino da definição das variáves globais.
 
+//De acordo com os dados de entrada verifica se o numero de macroblocos é certinho.
+void verif_viabilidade_macrobloco();
 
 void zera_vetor(int *macro_vet);//NÃO FOI TESTADO AINDA
 

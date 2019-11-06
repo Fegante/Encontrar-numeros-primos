@@ -11,8 +11,10 @@ int main()
     double tempo_gasto;
     matriz = criaMatriz();
     int opcao, i;
+    //printf("Tam Macro: %d\n",TAM_MACROBLOCO);
+    //verif_viabilidade_macrobloco();
     preenche_inicio_macro(pos_macro);
-    imprime_matriz(matriz);
+    //imprime_matriz(matriz);
     // preenche_inicio_macro(pos_macro);
     // imprime_macro_vet(pos_macro);
 
